@@ -113,17 +113,6 @@ body {
   border-radius: 22px;
   margin-bottom: 20px;
 }
-
-/* VIDEO WRAPPER */
-.video-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.video-next {
-  margin-top: 10px;
-}
 </style>
 </head>
 
@@ -180,6 +169,7 @@ body {
     src="samywait.mp4" 
     loop 
     autoplay
+    muted
     playsinline
     style="
       width: 90vw;
@@ -191,9 +181,6 @@ body {
     ">
   </video>
 </div>
-
-
-
 
 <!-- SLIDE 7 -->
 <div id="s7" class="screen" onclick="go(8)">
@@ -234,6 +221,7 @@ function go(n) {
   if (n === 6) {
     release.pause();
     video.currentTime = 0;
+    video.muted = false; // IMPORTANT FIX
     video.volume = 1;
     video.play();
   }
