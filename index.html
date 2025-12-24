@@ -64,10 +64,10 @@ body {
   line-height: 1.7;
 }
 
-/* ❤️ HEART — ACTUALLY FIXED */
+/* ❤️ HEART — ACTUALLY FIXED (BOTTOM INCLUDED) */
 .heart {
-  width: 320px;   /* wider to prevent flat edge */
-  height: 280px;
+  width: 320px;
+  height: 310px;              /* 🔥 MORE HEIGHT */
   cursor: pointer;
 
   -webkit-mask-image: url("data:image/svg+xml;utf8,\
@@ -76,8 +76,8 @@ body {
   </svg>");
   mask-image: -webkit-mask-image;
 
-  -webkit-mask-size: contain;
-  mask-size: contain;
+  -webkit-mask-size: cover;
+  mask-size: cover;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
@@ -86,9 +86,9 @@ body {
 
 .heart img {
   width: 110%;
-  height: 120%;
+  height: 135%;               /* 🔥 ALLOW BOTTOM SPACE */
   object-fit: cover;
-  object-position: 55% 58%; /* → slightly right + centered vertically */
+  object-position: 56% 65%;   /* right + down */
 }
 
 /* FLOWERS */
@@ -161,7 +161,7 @@ body {
   <div class="paragraph">
     I honestly want to write so much more here, because there’s so much I feel and so many
     little things about you that I love — and you know that too — but right now I’m so nervous
-    that my mind has gone completely blank 😭 And this chatgpt fucker is asking me to add inside
+    that my mind has gone completely blank 😭 And this chatgpt is asking me to add inside
     jokes but jab likhna hota hai tab kuch yaad hi nahi aata, jabki hai itna sab.
     But I guess that’s just me, and you know me well enough to understand that.
     For now, I’ll just say this — I’m so so grateful I get to love you, celebrate you,
@@ -175,7 +175,7 @@ body {
 <!-- SCREEN 5 -->
 <div id="screen5" class="screen hidden merry-bg">
   <div class="big">Also…</div>
-  <div class="mid">Merry Clitoris 🎄😌</div>
+  <div class="mid">Merry Clitoris 🎄😁</div>
 </div>
 
 <!-- AUDIO -->
@@ -199,6 +199,7 @@ function startFlowers() {
 
 function stopFlowers() {
   clearInterval(flowerInterval);
+  document.querySelectorAll(".flower").forEach(f => f.remove()); // 🔥 REMOVE EXISTING
 }
 
 function fadeOut(audio, callback) {
@@ -233,8 +234,8 @@ function showScreen(n) {
   document.getElementById("screen" + n).classList.remove("hidden");
 
   if (n === 2) {
-    fadeIn(document.getElementById("bgMusic"), 0.6);
     startFlowers();
+    fadeIn(document.getElementById("bgMusic"), 0.6);
   }
 
   if (n === 5) {
