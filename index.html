@@ -43,7 +43,6 @@ body {
   font-size: 2.2rem;
   margin-bottom: 25px;
   animation: pulse 2s infinite;
-  pointer-events: none;
 }
 
 .big {
@@ -69,39 +68,10 @@ body {
   animation: fadeIn 1.5s forwards;
 }
 
-/* HEART (FIXED + RELIABLE) */
-.heart {
-  width: 260px;
-  height: 260px;
-  background-image: url("front.jpg");
-  background-size: cover;
-  background-position: center 20%;
-  transform: rotate(-45deg);
-  position: relative;
+/* HEART */
+.heart-svg {
+  width: 280px;
   cursor: pointer;
-  border-radius: 50% 50% 0 0;
-}
-
-.heart::before,
-.heart::after {
-  content: "";
-  position: absolute;
-  width: 260px;
-  height: 260px;
-  background-image: url("front.jpg");
-  background-size: cover;
-  background-position: center 20%;
-  border-radius: 50%;
-}
-
-.heart::before {
-  top: -130px;
-  left: 0;
-}
-
-.heart::after {
-  left: 130px;
-  top: 0;
 }
 
 /* FLOWERS */
@@ -127,9 +97,7 @@ body {
 }
 
 @keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(360deg);
-  }
+  to { transform: translateY(110vh) rotate(360deg); }
 }
 </style>
 </head>
@@ -139,7 +107,21 @@ body {
 <!-- SCREEN 1 -->
 <div id="screen1" class="screen">
   <div class="enter-text">CLICK ON ME SAMYYYYYYYY 💜</div>
-  <div class="heart" onclick="goToScreen(2)"></div>
+
+  <svg class="heart-svg" viewBox="0 0 512 512" onclick="goToScreen(2)">
+    <defs>
+      <pattern id="imgPattern" patternUnits="objectBoundingBox" width="1" height="1">
+        <image href="front.jpg" width="512" height="512" preserveAspectRatio="xMidYMid slice" />
+      </pattern>
+    </defs>
+    <path
+      d="M256 464s-32-29-64-58C96 315 32 252 32 176
+         32 113 82 64 144 64c41 0 78 20 96 52
+         18-32 55-52 96-52 62 0 112 49 112 112
+         0 76-64 139-160 230-32 29-32 29-32 29z"
+      fill="url(#imgPattern)"
+    />
+  </svg>
 </div>
 
 <!-- SCREEN 2 -->
@@ -194,25 +176,46 @@ body {
   <div class="mid">I’m already waiting 😌</div>
 </div>
 
-<!-- FLOWERS SCRIPT -->
+<!-- AUDIO -->
+<audio id="bgMusic" src="song.mp3" preload="auto"></audio>
+
+<!-- FLOWERS -->
 <script>
 function createFlower() {
-  const flower = document.createElement("div");
-  flower.className = "flower";
-  flower.innerText = "🌸";
-  flower.style.left = Math.random() * 100 + "vw";
-  flower.style.animationDuration = 5 + Math.random() * 5 + "s";
-  document.body.appendChild(flower);
-  setTimeout(() => flower.remove(), 10000);
+  const f = document.createElement("div");
+  f.className = "flower";
+  f.innerText = "🌸";
+  f.style.left = Math.random() * 100 + "vw";
+  f.style.animationDuration = 5 + Math.random() * 5 + "s";
+  document.body.appendChild(f);
+  setTimeout(() => f.remove(), 10000);
 }
 setInterval(createFlower, 350);
 </script>
 
-<!-- NAVIGATION -->
+<!-- NAV + MUSIC -->
 <script>
-function goToScreen(num) {
+function goToScreen(n) {
   document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
-  document.getElementById("screen" + num).classList.remove("hidden");
+  document.getElementById("screen" + n).classList.remove("hidden");
+
+  if (n === 2) {
+    const music = document.getElementById("bgMusic");
+    if (music.paused) {
+      music.volume = 0;
+      music.play();
+
+      let vol = 0;
+      const fade = setInterval(() => {
+        if (vol < 0.6) {
+          vol += 0.02;
+          music.volume = vol;
+        } else {
+          clearInterval(fade);
+        }
+      }, 200);
+    }
+  }
 }
 </script>
 
