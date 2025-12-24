@@ -64,10 +64,10 @@ body {
   line-height: 1.7;
 }
 
-/* ❤️ HEART FRAME — FIXED */
+/* ❤️ HEART — ACTUALLY FIXED */
 .heart {
-  width: 300px;     /* FIXED WIDTH */
-  height: 260px;
+  width: 320px;   /* wider to prevent flat edge */
+  height: 280px;
   cursor: pointer;
 
   -webkit-mask-image: url("data:image/svg+xml;utf8,\
@@ -76,17 +76,19 @@ body {
   </svg>");
   mask-image: -webkit-mask-image;
 
-  -webkit-mask-size: cover;
-  mask-size: cover;
+  -webkit-mask-size: contain;
+  mask-size: contain;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
 
 .heart img {
-  width: 100%;
+  width: 110%;
   height: 120%;
   object-fit: cover;
-  object-position: center 60%;
+  object-position: 55% 58%; /* → slightly right + centered vertically */
 }
 
 /* FLOWERS */
@@ -181,58 +183,69 @@ body {
 <audio id="clitMusic" src="release.mp3"></audio>
 
 <script>
+let flowerInterval;
+
+function startFlowers() {
+  flowerInterval = setInterval(() => {
+    const f = document.createElement("div");
+    f.className = "flower";
+    f.innerText = "🌸";
+    f.style.left = Math.random() * 100 + "vw";
+    f.style.animationDuration = 5 + Math.random() * 5 + "s";
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 10000);
+  }, 350);
+}
+
+function stopFlowers() {
+  clearInterval(flowerInterval);
+}
+
+function fadeOut(audio, callback) {
+  let v = audio.volume;
+  const fade = setInterval(() => {
+    if (v > 0.05) {
+      v -= 0.03;
+      audio.volume = v;
+    } else {
+      clearInterval(fade);
+      audio.pause();
+      audio.currentTime = 0;
+      if (callback) callback();
+    }
+  }, 150);
+}
+
+function fadeIn(audio, target = 0.7) {
+  audio.volume = 0;
+  audio.play().catch(()=>{});
+  let v = 0;
+  const fade = setInterval(() => {
+    if (v < target) {
+      v += 0.03;
+      audio.volume = v;
+    } else clearInterval(fade);
+  }, 150);
+}
+
 function showScreen(n) {
   document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
   document.getElementById("screen" + n).classList.remove("hidden");
 
-  // song.mp3 on slide 2
   if (n === 2) {
-    const bg = document.getElementById("bgMusic");
-    if (bg.paused) {
-      bg.volume = 0;
-      bg.play().catch(()=>{});
-      let v = 0;
-      const fade = setInterval(() => {
-        if (v < 0.6) {
-          v += 0.02;
-          bg.volume = v;
-        } else clearInterval(fade);
-      }, 200);
-    }
+    fadeIn(document.getElementById("bgMusic"), 0.6);
+    startFlowers();
   }
 
-  // stop song.mp3 + fade release.mp3 on clitoris slide
   if (n === 5) {
-    const bg = document.getElementById("bgMusic");
-    bg.pause();
-    bg.currentTime = 0;
-
-    const clit = document.getElementById("clitMusic");
-    clit.volume = 0;
-    clit.play().catch(()=>{});
-    let v2 = 0;
-    const fade2 = setInterval(() => {
-      if (v2 < 0.7) {
-        v2 += 0.03;
-        clit.volume = v2;
-      } else clearInterval(fade2);
-    }, 200);
+    stopFlowers();
+    fadeOut(document.getElementById("bgMusic"), () => {
+      fadeIn(document.getElementById("clitMusic"), 0.7);
+    });
   }
 }
 
-// always start on screen 1
 window.onload = () => showScreen(1);
-
-// flowers
-setInterval(() => {
-  const f = document.createElement("div");
-  f.className = "flower";
-  f.innerText = "🌸";
-  f.style.left = Math.random() * 100 + "vw";
-  f.style.animationDuration = 5 + Math.random() * 5 + "s";
-  document.body.appendChild(f);
-  setTimeout(() => f.remove(), 10000);
-}, 350);
 </script>
 
 </body>
