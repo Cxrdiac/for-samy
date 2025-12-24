@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You</title>
+<title>For You 💜</title>
 
 <style>
 * {
@@ -29,12 +29,10 @@ body {
   justify-content: center;
   text-align: center;
   padding: 20px;
-  transition: opacity 0.8s ease;
 }
 
 .hidden {
-  opacity: 0;
-  pointer-events: none;
+  display: none;
 }
 
 /* TEXT */
@@ -66,9 +64,9 @@ body {
   line-height: 1.7;
 }
 
-/* ❤️ HEART FRAME */
+/* ❤️ HEART FRAME — FIXED */
 .heart {
-  width: 280px;
+  width: 300px;     /* FIXED WIDTH */
   height: 260px;
   cursor: pointer;
 
@@ -132,20 +130,20 @@ body {
 <!-- SCREEN 1 -->
 <div id="screen1" class="screen">
   <div class="enter-text">CLICK ON ME SAMYYYYYYYY 💜</div>
-  <div class="heart" onclick="goToScreen(2)">
+  <div class="heart" onclick="showScreen(2)">
     <img src="front.jpg" alt="front">
   </div>
 </div>
 
 <!-- SCREEN 2 -->
-<div id="screen2" class="screen hidden" onclick="goToScreen(3)">
-  <div class="big">YOU’RE 23!!!</div>
-  <div class="mid">EVEN HOTTER NOW</div>
-  <div class="next">go next cutu</div>
+<div id="screen2" class="screen hidden" onclick="showScreen(3)">
+  <div class="big">YOU’RE 23!!! 🎉</div>
+  <div class="mid">EVEN HOTTER NOW 😮😜</div>
+  <div class="next">go next cutu 🌹</div>
 </div>
 
 <!-- SCREEN 3 -->
-<div id="screen3" class="screen hidden" onclick="goToScreen(4)">
+<div id="screen3" class="screen hidden" onclick="showScreen(4)">
   <div class="paragraph">
     Happy 23rd Birthday, my princess 💜<br><br>
     You somehow keep getting more beautiful every day, and not just on the outside.
@@ -157,7 +155,7 @@ body {
 </div>
 
 <!-- SCREEN 4 -->
-<div id="screen4" class="screen hidden" onclick="goToScreen(5)">
+<div id="screen4" class="screen hidden" onclick="showScreen(5)">
   <div class="paragraph">
     I honestly want to write so much more here, because there’s so much I feel and so many
     little things about you that I love — and you know that too — but right now I’m so nervous
@@ -183,21 +181,21 @@ body {
 <audio id="clitMusic" src="release.mp3"></audio>
 
 <script>
-function goToScreen(n) {
+function showScreen(n) {
   document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
   document.getElementById("screen" + n).classList.remove("hidden");
 
-  // song.mp3 on screen 2
+  // song.mp3 on slide 2
   if (n === 2) {
-    const music = document.getElementById("bgMusic");
-    if (music.paused) {
-      music.volume = 0;
-      music.play();
+    const bg = document.getElementById("bgMusic");
+    if (bg.paused) {
+      bg.volume = 0;
+      bg.play().catch(()=>{});
       let v = 0;
       const fade = setInterval(() => {
         if (v < 0.6) {
           v += 0.02;
-          music.volume = v;
+          bg.volume = v;
         } else clearInterval(fade);
       }, 200);
     }
@@ -211,8 +209,7 @@ function goToScreen(n) {
 
     const clit = document.getElementById("clitMusic");
     clit.volume = 0;
-    clit.play();
-
+    clit.play().catch(()=>{});
     let v2 = 0;
     const fade2 = setInterval(() => {
       if (v2 < 0.7) {
@@ -222,6 +219,9 @@ function goToScreen(n) {
     }, 200);
   }
 }
+
+// always start on screen 1
+window.onload = () => showScreen(1);
 
 // flowers
 setInterval(() => {
