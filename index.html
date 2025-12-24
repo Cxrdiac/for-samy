@@ -1,254 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>For You 💜</title>
+<meta charset="UTF-8">
+<title>For You 💜</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
-    body {
-      height: 100vh;
-      background: linear-gradient(180deg, #e0c3fc, #8e44ad);
-      overflow: hidden;
-      color: white;
-    }
+body {
+  height: 100vh;
+  background: linear-gradient(180deg, #e0c3fc, #8e44ad);
+  overflow: hidden;
+  color: white;
+}
 
-    /* SCREENS */
-    .screen {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.8s ease;
-      z-index: 2;
-      text-align: center;
-      padding: 20px;
-    }
+/* SCREENS */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  transition: opacity 0.8s ease;
+  z-index: 2;
+}
 
-    .hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
 
-    /* TEXT */
-    .enter-text {
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      animation: pulse 2s infinite;
-      pointer-events: none;
-    }
+/* TEXT */
+.enter-text {
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  animation: pulse 2s infinite;
+  pointer-events: none;
+}
 
-    .big {
-      font-size: 3rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-      animation: fadeIn 1s forwards;
-    }
+.big {
+  font-size: 3rem;
+  font-weight: 800;
+}
 
-    .mid {
-      font-size: 2.1rem;
-      font-weight: 600;
-      margin-bottom: 40px;
-      animation: fadeIn 1.3s forwards;
-    }
+.mid {
+  font-size: 2.1rem;
+  margin-top: 10px;
+}
 
-    .next {
-      font-size: 1.4rem;
-      opacity: 0.85;
-      animation: pulse 2s infinite;
-    }
+.next {
+  margin-top: 35px;
+  font-size: 1.4rem;
+  animation: pulse 2s infinite;
+}
 
-    .paragraph {
-      max-width: 720px;
-      font-size: 1.25rem;
-      line-height: 1.7;
-      animation: fadeIn 1.5s forwards;
-    }
+.paragraph {
+  max-width: 720px;
+  font-size: 1.25rem;
+  line-height: 1.7;
+  animation: fadeIn 1.5s forwards;
+}
 
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.6; }
-      100% { opacity: 1; }
-    }
+/* HEART (FIXED + RELIABLE) */
+.heart {
+  width: 260px;
+  height: 260px;
+  background-image: url("front.jpg");
+  background-size: cover;
+  background-position: center 20%;
+  transform: rotate(-45deg);
+  position: relative;
+  cursor: pointer;
+  border-radius: 50% 50% 0 0;
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  background-image: url("front.jpg");
+  background-size: cover;
+  background-position: center 20%;
+  border-radius: 50%;
+}
 
-    /* PERFECT HEART (SVG BASED – FIXED) */
-    .heart-wrapper {
-      width: 300px;
-      cursor: pointer;
-    }
+.heart::before {
+  top: -130px;
+  left: 0;
+}
 
-    .heart-wrapper svg {
-      width: 100%;
-      height: auto;
-    }
+.heart::after {
+  left: 130px;
+  top: 0;
+}
 
-    /* FLOWERS */
-    .flower {
-      position: absolute;
-      top: -50px;
-      font-size: 22px;
-      animation: fall linear infinite;
-      opacity: 0.85;
-      z-index: 1;
-    }
+/* FLOWERS */
+.flower {
+  position: absolute;
+  top: -40px;
+  font-size: 20px;
+  animation: fall linear infinite;
+  opacity: 0.8;
+  z-index: 1;
+}
 
-    @keyframes fall {
-      to {
-        transform: translateY(110vh) rotate(360deg);
-      }
-    }
+/* ANIMATIONS */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
 
-    /* SNOW FOR CHRISTMAS SLIDE */
-    .snow {
-      position: absolute;
-      top: -30px;
-      font-size: 18px;
-      animation: snowFall linear infinite;
-      opacity: 0.9;
-      z-index: 1;
-    }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    @keyframes snowFall {
-      to {
-        transform: translateY(110vh);
-      }
-    }
-  </style>
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- SCREEN 1 -->
-  <div id="screen1" class="screen">
-    <div class="enter-text">
-      CLICK ON ME SAMYYYYYYYY 💜
-    </div>
+<!-- SCREEN 1 -->
+<div id="screen1" class="screen">
+  <div class="enter-text">CLICK ON ME SAMYYYYYYYY 💜</div>
+  <div class="heart" onclick="goToScreen(2)"></div>
+</div>
 
-    <div class="heart-wrapper" onclick="goToScreen(2)">
-      <svg viewBox="0 0 200 180">
-        <defs>
-          <clipPath id="heartClip">
-            <path d="
-              M100 30
-              C100 0 200 0 200 60
-              C200 120 100 170 100 180
-              C100 170 0 120 0 60
-              C0 0 100 0 100 30 Z
-            "/>
-          </clipPath>
-        </defs>
+<!-- SCREEN 2 -->
+<div id="screen2" class="screen hidden" onclick="goToScreen(3)">
+  <div class="big">YOU’RE 23!!! 🎉💜</div>
+  <div class="mid">EVEN HOTTER NOW 😮😜</div>
+  <div class="next">go next cutu 🌹</div>
+</div>
 
-        <image 
-          href="front.jpg"
-          width="200"
-          height="180"
-          clip-path="url(#heartClip)"
-          preserveAspectRatio="xMidYMid slice"
-        />
-      </svg>
-    </div>
+<!-- SCREEN 3 -->
+<div id="screen3" class="screen hidden" onclick="goToScreen(4)">
+  <div class="paragraph">
+    <strong>Happy 23rd Birthday, my princess 💜</strong><br><br>
+    You somehow keep getting more beautiful every day, and not just on the outside.
+    Your laugh, the way you care, and the way you make me happy without even trying —
+    all of it means so much to me. You have this calm, comforting way of making everything
+    feel better, and being with you just feels right. I love how you understand me,
+    how safe I feel with you, and how even the smallest moments with you turn into something special.
+    <br><br>
+    <em>(tap anywhere)</em>
   </div>
+</div>
 
-  <!-- SCREEN 2 -->
-  <div id="screen2" class="screen hidden" onclick="goToScreen(3)">
-    <div class="big">YOU’RE 23!!! 🎉💜</div>
-    <div class="mid">EVEN HOTTER NOW 😮😜</div>
-    <div class="next">go next cutu 🌹</div>
+<!-- SCREEN 4 -->
+<div id="screen4" class="screen hidden" onclick="goToScreen(5)">
+  <div class="paragraph">
+    I honestly want to write so much more here, because there’s so much I feel and so many
+    little things about you that I love — and you know that too — but right now I’m so nervous
+    that my mind has gone completely blank 😭 And this chatgpt fucker is asking me to add inside
+    jokes but jab likhna hota hai tab kuch yaad hi nahi aata, jabki hai itna sab.
+    But I guess that’s just me, and you know me well enough to understand that.
+    For now, I’ll just say this — I’m so so grateful I get to love you, celebrate you,
+    and be by your side.
+    <br><br>
+    Here’s to you, to us, and to all the memories still waiting for us 🌸✨
+    <br><br>
+    <strong>Hey, let’s connect in 15.</strong><br>
+    <strong>Mlem</strong>
   </div>
+</div>
 
-  <!-- SCREEN 3 -->
-  <div id="screen3" class="screen hidden" onclick="goToScreen(4)">
-    <div class="paragraph">
-      <strong>Happy 23rd Birthday, my princess 💜</strong><br><br>
-      You somehow keep getting more beautiful every day, and not just on the outside.
-      Your laugh, the way you care, and the way you make me happy without even trying —
-      all of it means so much to me. You have this calm, comforting way of making everything
-      feel better, and being with you just feels right. I love how you understand me,
-      how safe I feel with you, and how even the smallest moments with you turn into something special.
-      <br><br>
-      <em>(tap anywhere)</em>
-    </div>
-  </div>
+<!-- SCREEN 5 -->
+<div id="screen5" class="screen hidden" onclick="goToScreen(6)">
+  <div class="big">Also…</div>
+  <div class="mid">Merry Clitoris 🎄😌</div>
+  <div class="next">tap anywhere 🎁</div>
+</div>
 
-  <!-- SCREEN 4 -->
-  <div id="screen4" class="screen hidden" onclick="goToScreen(5)">
-    <div class="paragraph">
-      I honestly want to write so much more here, because there’s so much I feel and so many
-      little things about you that I love — and you know that too — but right now I’m so nervous
-      that my mind has gone completely blank 😭 And this chatgpt fucker is asking me to add inside
-      jokes but jab likhna hota hai tab kuch yaad hi nahi aata, jabki hai itna sab.
-      But I guess that’s just me, and you know me well enough to understand that.
-      For now, I’ll just say this — I’m so so grateful I get to love you, celebrate you,
-      and be by your side.
-      <br><br>
-      Here’s to you, to us, and to all the memories still waiting for us 🌸✨
-      <br><br>
-      <strong>Hey, let’s connect in 15.</strong><br>
-      <strong>Mlem</strong>
-    </div>
-  </div>
+<!-- SCREEN 6 -->
+<div id="screen6" class="screen hidden">
+  <div class="big">Okay now come here 💜</div>
+  <div class="mid">I’m already waiting 😌</div>
+</div>
 
-  <!-- SCREEN 5 – MERRY CLITORIS -->
-  <div id="screen5" class="screen hidden" onclick="goToScreen(6)">
-    <div class="big">Also…</div>
-    <div class="mid">Merry Clitoris 🎄😌</div>
-    <div class="next">tap anywhere 🎁</div>
-  </div>
+<!-- FLOWERS SCRIPT -->
+<script>
+function createFlower() {
+  const flower = document.createElement("div");
+  flower.className = "flower";
+  flower.innerText = "🌸";
+  flower.style.left = Math.random() * 100 + "vw";
+  flower.style.animationDuration = 5 + Math.random() * 5 + "s";
+  document.body.appendChild(flower);
+  setTimeout(() => flower.remove(), 10000);
+}
+setInterval(createFlower, 350);
+</script>
 
-  <!-- SCREEN 6 – FINAL (YOU CAN CHANGE LATER) -->
-  <div id="screen6" class="screen hidden">
-    <div class="big">Okay now come here 💜</div>
-    <div class="mid">I’m already waiting 😌</div>
-  </div>
-
-  <!-- FLOWERS -->
-  <script>
-    function createFlower() {
-      const flower = document.createElement("div");
-      flower.classList.add("flower");
-      flower.innerText = "🌸";
-      flower.style.left = Math.random() * 100 + "vw";
-      flower.style.animationDuration = 5 + Math.random() * 5 + "s";
-      document.body.appendChild(flower);
-      setTimeout(() => flower.remove(), 10000);
-    }
-    setInterval(createFlower, 350);
-  </script>
-
-  <!-- SNOW FOR CHRISTMAS SLIDE -->
-  <script>
-    function createSnow() {
-      const snow = document.createElement("div");
-      snow.classList.add("snow");
-      snow.innerText = "❄️";
-      snow.style.left = Math.random() * 100 + "vw";
-      snow.style.animationDuration = 4 + Math.random() * 4 + "s";
-      document.body.appendChild(snow);
-      setTimeout(() => snow.remove(), 10000);
-    }
-    setInterval(createSnow, 500);
-  </script>
-
-  <!-- NAVIGATION -->
-  <script>
-    function goToScreen(num) {
-      document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
-      document.getElementById("screen" + num).classList.remove("hidden");
-    }
-  </script>
+<!-- NAVIGATION -->
+<script>
+function goToScreen(num) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
+  document.getElementById("screen" + num).classList.remove("hidden");
+}
+</script>
 
 </body>
 </html>
