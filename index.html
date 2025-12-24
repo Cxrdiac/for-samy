@@ -41,14 +41,36 @@ body {
 .enter-text {
   font-size: 2.2rem;
   margin-bottom: 25px;
+  animation: pulse 2s infinite;
 }
 
-/* ✅ REAL HEART FRAME */
+.big {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.mid {
+  font-size: 2.1rem;
+  margin-top: 10px;
+}
+
+.next {
+  margin-top: 30px;
+  font-size: 1.4rem;
+  animation: pulse 2s infinite;
+}
+
+.paragraph {
+  max-width: 720px;
+  font-size: 1.25rem;
+  line-height: 1.7;
+}
+
+/* ❤️ HEART FRAME */
 .heart {
   width: 280px;
   height: 260px;
   cursor: pointer;
-  overflow: hidden;
 
   -webkit-mask-image: url("data:image/svg+xml;utf8,\
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 29'>\
@@ -58,16 +80,15 @@ body {
 
   -webkit-mask-size: cover;
   mask-size: cover;
-
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
 }
 
 .heart img {
   width: 100%;
-  height: 100%;
+  height: 120%;
   object-fit: cover;
-  object-position: center 15%;
+  object-position: center 60%;
 }
 
 /* FLOWERS */
@@ -82,6 +103,27 @@ body {
 @keyframes fall {
   to { transform: translateY(110vh) rotate(360deg); }
 }
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* MERRY CLITORIS BACKGROUND */
+.merry-bg {
+  background-image: url("maria-ss.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.merry-bg .big,
+.merry-bg .mid {
+  background: rgba(0,0,0,0.3);
+  padding: 10px 18px;
+  border-radius: 10px;
+  opacity: 0.9;
+}
 </style>
 </head>
 
@@ -89,39 +131,96 @@ body {
 
 <!-- SCREEN 1 -->
 <div id="screen1" class="screen">
-  <div class="enter-text">CLICK ON ME SAMYYYYYYYY</div>
-
+  <div class="enter-text">CLICK ON ME SAMYYYYYYYY 💜</div>
   <div class="heart" onclick="goToScreen(2)">
     <img src="front.jpg" alt="front">
   </div>
 </div>
 
 <!-- SCREEN 2 -->
-<div id="screen2" class="screen hidden">
-  <h1>YOU’RE 23!!!</h1>
+<div id="screen2" class="screen hidden" onclick="goToScreen(3)">
+  <div class="big">YOU’RE 23!!!</div>
+  <div class="mid">EVEN HOTTER NOW</div>
+  <div class="next">go next cutu</div>
+</div>
+
+<!-- SCREEN 3 -->
+<div id="screen3" class="screen hidden" onclick="goToScreen(4)">
+  <div class="paragraph">
+    Happy 23rd Birthday, my princess 💜<br><br>
+    You somehow keep getting more beautiful every day, and not just on the outside.
+    Your laugh, the way you care, and the way you make me happy without even trying —
+    all of it means so much to me. You have this calm, comforting way of making everything
+    feel better, and being with you just feels right. I love how you understand me,
+    how safe I feel with you, and how even the smallest moments with you turn into something special.
+  </div>
+</div>
+
+<!-- SCREEN 4 -->
+<div id="screen4" class="screen hidden" onclick="goToScreen(5)">
+  <div class="paragraph">
+    I honestly want to write so much more here, because there’s so much I feel and so many
+    little things about you that I love — and you know that too — but right now I’m so nervous
+    that my mind has gone completely blank 😭 And this chatgpt fucker is asking me to add inside
+    jokes but jab likhna hota hai tab kuch yaad hi nahi aata, jabki hai itna sab.
+    But I guess that’s just me, and you know me well enough to understand that.
+    For now, I’ll just say this — I’m so so grateful I get to love you, celebrate you,
+    and be by your side.<br><br>
+    Here’s to you, to us, and to all the memories still waiting for us 🌸✨<br>
+    Hey, let’s connect in 15.<br>
+    Mlem
+  </div>
+</div>
+
+<!-- SCREEN 5 -->
+<div id="screen5" class="screen hidden merry-bg">
+  <div class="big">Also…</div>
+  <div class="mid">Merry Clitoris 🎄😌</div>
 </div>
 
 <!-- AUDIO -->
 <audio id="bgMusic" src="song.mp3"></audio>
+<audio id="clitMusic" src="release.mp3"></audio>
 
 <script>
 function goToScreen(n) {
-  document.getElementById("screen1").classList.add("hidden");
-  document.getElementById("screen2").classList.remove("hidden");
+  document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
+  document.getElementById("screen" + n).classList.remove("hidden");
 
-  const music = document.getElementById("bgMusic");
-  music.volume = 0;
-  music.play();
-
-  let v = 0;
-  const fade = setInterval(() => {
-    if (v < 0.6) {
-      v += 0.02;
-      music.volume = v;
-    } else {
-      clearInterval(fade);
+  // song.mp3 on screen 2
+  if (n === 2) {
+    const music = document.getElementById("bgMusic");
+    if (music.paused) {
+      music.volume = 0;
+      music.play();
+      let v = 0;
+      const fade = setInterval(() => {
+        if (v < 0.6) {
+          v += 0.02;
+          music.volume = v;
+        } else clearInterval(fade);
+      }, 200);
     }
-  }, 200);
+  }
+
+  // stop song.mp3 + fade release.mp3 on clitoris slide
+  if (n === 5) {
+    const bg = document.getElementById("bgMusic");
+    bg.pause();
+    bg.currentTime = 0;
+
+    const clit = document.getElementById("clitMusic");
+    clit.volume = 0;
+    clit.play();
+
+    let v2 = 0;
+    const fade2 = setInterval(() => {
+      if (v2 < 0.7) {
+        v2 += 0.03;
+        clit.volume = v2;
+      } else clearInterval(fade2);
+    }, 200);
+  }
 }
 
 // flowers
