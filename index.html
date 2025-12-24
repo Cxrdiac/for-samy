@@ -10,6 +10,9 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 body {
@@ -29,10 +32,14 @@ body {
   justify-content: center;
   text-align: center;
   padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease;
 }
 
-.hidden {
-  display: none;
+.screen.active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* TEXT */
@@ -64,31 +71,33 @@ body {
   line-height: 1.7;
 }
 
-/* ❤️ HEART — ACTUALLY FIXED (BOTTOM INCLUDED) */
+/* ❤️ HEART (FINAL FIX + GLOW) */
 .heart {
-  width: 320px;
-  height: 310px;              /* 🔥 MORE HEIGHT */
+  width: 330px;
+  height: 330px;
   cursor: pointer;
+  animation: glow 3s infinite ease-in-out;
 
   -webkit-mask-image: url("data:image/svg+xml;utf8,\
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 29'>\
     <path fill='white' d='M23.6,0c-3.4,0-6.4,2.1-7.6,5.1C14.8,2.1,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.3,16,20.6,16,20.6s16-11.3,16-20.6C32,3.8,28.2,0,23.6,0z'/>\
   </svg>");
-  mask-image: -webkit-mask-image;
-
   -webkit-mask-size: cover;
-  mask-size: cover;
   -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
   -webkit-mask-position: center;
-  mask-position: center;
 }
 
 .heart img {
-  width: 110%;
-  height: 135%;               /* 🔥 ALLOW BOTTOM SPACE */
+  width: 115%;
+  height: 140%;
   object-fit: cover;
-  object-position: 56% 65%;   /* right + down */
+  object-position: 58% 60%;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 15px rgba(255,255,255,0.4); }
+  50% { box-shadow: 0 0 30px rgba(255,255,255,0.8); }
+  100% { box-shadow: 0 0 15px rgba(255,255,255,0.4); }
 }
 
 /* FLOWERS */
@@ -110,7 +119,7 @@ body {
   100% { opacity: 1; }
 }
 
-/* MERRY CLITORIS BACKGROUND */
+/* MERRY CLITORIS */
 .merry-bg {
   background-image: url("maria-ss.png");
   background-size: cover;
@@ -119,134 +128,147 @@ body {
 
 .merry-bg .big,
 .merry-bg .mid {
-  background: rgba(0,0,0,0.3);
-  padding: 10px 18px;
+  background: rgba(0,0,0,0.35);
+  padding: 12px 20px;
   border-radius: 10px;
-  opacity: 0.9;
+}
+
+/* SIDE IMAGE */
+.side-img {
+  width: 280px;
+  border-radius: 20px;
+  margin-bottom: 20px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- SCREEN 1 -->
-<div id="screen1" class="screen">
+<div id="s1" class="screen active">
   <div class="enter-text">CLICK ON ME SAMYYYYYYYY 💜</div>
-  <div class="heart" onclick="showScreen(2)">
-    <img src="front.jpg" alt="front">
+  <div class="heart" onclick="go(2)">
+    <img src="front.jpg">
   </div>
 </div>
 
-<!-- SCREEN 2 -->
-<div id="screen2" class="screen hidden" onclick="showScreen(3)">
+<div id="s2" class="screen" onclick="go(3)">
   <div class="big">YOU’RE 23!!! 🎉</div>
   <div class="mid">EVEN HOTTER NOW 😮😜</div>
   <div class="next">go next cutu 🌹</div>
 </div>
 
-<!-- SCREEN 3 -->
-<div id="screen3" class="screen hidden" onclick="showScreen(4)">
+<div id="s3" class="screen" onclick="go(4)">
   <div class="paragraph">
     Happy 23rd Birthday, my princess 💜<br><br>
     You somehow keep getting more beautiful every day, and not just on the outside.
     Your laugh, the way you care, and the way you make me happy without even trying —
-    all of it means so much to me. You have this calm, comforting way of making everything
-    feel better, and being with you just feels right. I love how you understand me,
-    how safe I feel with you, and how even the smallest moments with you turn into something special.
+    all of it means so much to me.
   </div>
 </div>
 
-<!-- SCREEN 4 -->
-<div id="screen4" class="screen hidden" onclick="showScreen(5)">
+<div id="s4" class="screen" onclick="go(5)">
   <div class="paragraph">
-    I honestly want to write so much more here, because there’s so much I feel and so many
-    little things about you that I love — and you know that too — but right now I’m so nervous
-    that my mind has gone completely blank 😭 And this chatgpt is asking me to add inside
-    jokes but jab likhna hota hai tab kuch yaad hi nahi aata, jabki hai itna sab.
-    But I guess that’s just me, and you know me well enough to understand that.
-    For now, I’ll just say this — I’m so so grateful I get to love you, celebrate you,
-    and be by your side.<br><br>
+    I honestly want to write so much more here, but right now my mind has gone completely blank 😭
+    <br><br>
     Here’s to you, to us, and to all the memories still waiting for us 🌸✨<br>
     Hey, let’s connect in 15.<br>
     Mlem
   </div>
 </div>
 
-<!-- SCREEN 5 -->
-<div id="screen5" class="screen hidden merry-bg">
+<div id="s5" class="screen merry-bg" onclick="go(6)">
   <div class="big">Also…</div>
-  <div class="mid">Merry Clitoris 🎄😁</div>
+  <div class="mid">Merry Clitoris 🎄😌</div>
 </div>
 
-<!-- AUDIO -->
-<audio id="bgMusic" src="song.mp3"></audio>
-<audio id="clitMusic" src="release.mp3"></audio>
+<div id="s6" class="screen" onclick="go(7)">
+  <video id="video" src="samywait.mp4" loop playsinline style="max-width:90%; border-radius:20px;"></video>
+  <div class="next">tap to continue</div>
+</div>
+
+<div id="s7" class="screen" onclick="go(8)">
+  <img src="side.jpg" class="side-img">
+  <div class="mid">Happy birthday again, baby. Enjoy your day.</div>
+</div>
+
+<div id="s8" class="screen">
+  <div class="big" style="font-size:4rem;">I LOVE YOU</div>
+</div>
+
+<audio id="song" src="song.mp3"></audio>
+<audio id="release" src="release.mp3"></audio>
 
 <script>
-let flowerInterval;
+let flowers;
+let song = document.getElementById("song");
+let release = document.getElementById("release");
+let video = document.getElementById("video");
+let pausedTime = 0;
 
-function startFlowers() {
-  flowerInterval = setInterval(() => {
-    const f = document.createElement("div");
-    f.className = "flower";
-    f.innerText = "🌸";
-    f.style.left = Math.random() * 100 + "vw";
-    f.style.animationDuration = 5 + Math.random() * 5 + "s";
-    document.body.appendChild(f);
-    setTimeout(() => f.remove(), 10000);
-  }, 350);
-}
+function go(n) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById("s"+n).classList.add("active");
 
-function stopFlowers() {
-  clearInterval(flowerInterval);
-  document.querySelectorAll(".flower").forEach(f => f.remove()); // 🔥 REMOVE EXISTING
-}
+  if (n === 2) startFlowers();
+  if (n === 5) stopFlowers();
 
-function fadeOut(audio, callback) {
-  let v = audio.volume;
-  const fade = setInterval(() => {
-    if (v > 0.05) {
-      v -= 0.03;
-      audio.volume = v;
-    } else {
-      clearInterval(fade);
-      audio.pause();
-      audio.currentTime = 0;
-      if (callback) callback();
-    }
-  }, 150);
-}
-
-function fadeIn(audio, target = 0.7) {
-  audio.volume = 0;
-  audio.play().catch(()=>{});
-  let v = 0;
-  const fade = setInterval(() => {
-    if (v < target) {
-      v += 0.03;
-      audio.volume = v;
-    } else clearInterval(fade);
-  }, 150);
-}
-
-function showScreen(n) {
-  document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
-  document.getElementById("screen" + n).classList.remove("hidden");
-
-  if (n === 2) {
-    startFlowers();
-    fadeIn(document.getElementById("bgMusic"), 0.6);
+  if (n === 2 && song.paused) {
+    song.currentTime = pausedTime;
+    song.volume = 0.6;
+    song.play();
   }
 
   if (n === 5) {
-    stopFlowers();
-    fadeOut(document.getElementById("bgMusic"), () => {
-      fadeIn(document.getElementById("clitMusic"), 0.7);
-    });
+    pausedTime = song.currentTime;
+    fadeOut(song);
+    release.volume = 1;
+    release.play();
+  }
+
+  if (n === 6) {
+    release.pause();
+    video.volume = 1;
+    video.play();
+  }
+
+  if (n === 7) {
+    pausedTime = pausedTime || 0;
+    song.currentTime = pausedTime;
+    song.volume = 0.6;
+    song.play();
   }
 }
 
-window.onload = () => showScreen(1);
+function fadeOut(audio) {
+  let v = audio.volume;
+  let fade = setInterval(() => {
+    if (v > 0.05) {
+      v -= 0.05;
+      audio.volume = v;
+    } else {
+      audio.pause();
+      clearInterval(fade);
+    }
+  }, 100);
+}
+
+function startFlowers() {
+  stopFlowers();
+  flowers = setInterval(() => {
+    let f = document.createElement("div");
+    f.className = "flower";
+    f.innerText = "🌸";
+    f.style.left = Math.random()*100+"vw";
+    f.style.animationDuration = 5+Math.random()*5+"s";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),10000);
+  },350);
+}
+
+function stopFlowers() {
+  clearInterval(flowers);
+  document.querySelectorAll(".flower").forEach(f=>f.remove());
+}
 </script>
 
 </body>
