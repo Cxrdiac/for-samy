@@ -4,164 +4,132 @@
 <meta charset="UTF-8">
 <title>For You 💜</title>
 
-<!-- Cute fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-
-  user-select: none;
-  -webkit-user-select: none;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  user-select:none;
 }
 
-body {
-  height: 100vh;
-  background: linear-gradient(180deg, #e7c6ff, #9b5de5);
-  overflow: hidden;
-  color: white;
-  font-family: 'Poppins', sans-serif;
+body{
+  height:100vh;
+  background:linear-gradient(180deg,#e7c6ff,#9b5de5);
+  color:white;
+  overflow:hidden;
+  font-family:'Poppins',sans-serif;
 }
 
-/* SCREENS */
-.screen {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 25px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1.2s ease;
+.screen{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:25px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 1.2s ease;
 }
 
-.screen.active {
-  opacity: 1;
-  pointer-events: auto;
+.screen.active{
+  opacity:1;
+  pointer-events:auto;
 }
 
-/* TEXT */
-.enter-text {
-  font-family: 'Pacifico', cursive;
-  font-size: 2.4rem;
-  margin-bottom: 25px;
-  animation: pulse 2s infinite;
+.enter-text{
+  font-family:'Pacifico',cursive;
+  font-size:2.4rem;
+  margin-bottom:25px;
+  animation:pulse 2s infinite;
 }
 
-.big {
-  font-family: 'Pacifico', cursive;
-  font-size: 3.2rem;
+.big{
+  font-family:'Pacifico',cursive;
+  font-size:3.2rem;
 }
 
-.mid {
-  font-size: 2rem;
-  margin-top: 12px;
+.mid{
+  font-size:2rem;
+  margin-top:12px;
 }
 
-.next {
-  margin-top: 30px;
-  font-size: 1.4rem;
-  animation: pulse 2s infinite;
+.next{
+  margin-top:30px;
+  font-size:1.4rem;
+  animation:pulse 2s infinite;
 }
 
-.paragraph {
-  max-width: 720px;
-  font-size: 1.25rem;
-  line-height: 1.8;
+.paragraph{
+  max-width:720px;
+  font-size:1.25rem;
+  line-height:1.8;
 }
 
-/* ❤️ HEART (ACTUALLY FIXED) */
-.heart {
-  width: 340px;
-  height: 340px;
-  cursor: pointer;
-  animation: glow 3s infinite ease-in-out;
-
-  -webkit-mask-image: url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 471'>\
-<path fill='white' d='M256 471s-256-149-256-303C0 76 76 0 168 0c59 0 111 30 144 76C345 30 397 0 456 0c92 0 168 76 168 168 0 154-256 303-256 303z'/>\
-</svg>");
-  -webkit-mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
+@keyframes pulse{
+  0%{opacity:1}
+  50%{opacity:.6}
+  100%{opacity:1}
 }
 
-.heart img {
-  width: 115%;
-  height: 140%;
-  object-fit: cover;
-  object-position: 60% 65%;
+/* CLITORIS BG */
+.merry-bg{
+  background:url("maria-ss.png") center/cover;
 }
-
-/* glow */
-@keyframes glow {
-  0% { box-shadow: 0 0 15px rgba(255,255,255,0.4); }
-  50% { box-shadow: 0 0 35px rgba(255,255,255,0.9); }
-  100% { box-shadow: 0 0 15px rgba(255,255,255,0.4); }
-}
-
-/* FLOWERS */
-.flower {
-  position: absolute;
-  top: -40px;
-  font-size: 22px;
-  animation: fall linear infinite;
-  opacity: 0.85;
-}
-
-@keyframes fall {
-  to { transform: translateY(110vh) rotate(360deg); }
-}
-
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.6; }
-  100% { opacity: 1; }
-}
-
-/* CLITORIS BACKGROUND */
-.merry-bg {
-  background-image: url("maria-ss.png");
-  background-size: cover;
-  background-position: center;
-}
-
 .merry-bg .big,
-.merry-bg .mid {
-  background: rgba(0,0,0,0.35);
-  padding: 14px 22px;
-  border-radius: 12px;
+.merry-bg .mid{
+  background:rgba(0,0,0,.35);
+  padding:14px 22px;
+  border-radius:12px;
 }
 
 /* SIDE IMAGE */
-.side-img {
-  width: 280px;
-  border-radius: 22px;
-  margin-bottom: 20px;
+.side-img{
+  width:280px;
+  border-radius:22px;
+  margin-bottom:20px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- SLIDE 1 -->
 <div id="s1" class="screen active">
   <div class="enter-text">CLICK ON ME SAMYYYYYYYY 💜</div>
-  <div class="heart" onclick="go(2)">
-    <img src="front.jpg">
+
+  <div onclick="go(2)" style="cursor:pointer;filter:drop-shadow(0 0 25px rgba(255,255,255,.8));">
+    <svg width="340" height="320" viewBox="0 0 512 471">
+      <defs>
+        <clipPath id="heartClip">
+          <path d="M256 471s-256-149-256-303C0 76 76 0 168 0c59 0 111 30 144 76C345 30 397 0 456 0c92 0 168 76 168 168 0 154-256 303-256 303z"/>
+        </clipPath>
+      </defs>
+
+      <image 
+        href="front.jpg"
+        width="512"
+        height="471"
+        clip-path="url(#heartClip)"
+        preserveAspectRatio="xMidYMid slice"
+        transform="translate(30,35)"
+      />
+    </svg>
   </div>
 </div>
 
+<!-- SLIDE 2 -->
 <div id="s2" class="screen" onclick="go(3)">
   <div class="big">YOU’RE 23!!! 🎉</div>
   <div class="mid">EVEN HOTTER NOW 😮😜</div>
   <div class="next">go next cutu 🌹</div>
 </div>
 
+<!-- SLIDE 3 -->
 <div id="s3" class="screen" onclick="go(4)">
   <div class="paragraph">
     Happy 23rd Birthday, my princess 💜<br><br>
@@ -171,6 +139,7 @@ body {
   </div>
 </div>
 
+<!-- SLIDE 4 -->
 <div id="s4" class="screen" onclick="go(5)">
   <div class="paragraph">
     I honestly want to write so much more here, because there’s so much I feel and so many little things about you that I love — and you know that too —
@@ -185,97 +154,66 @@ body {
   </div>
 </div>
 
+<!-- SLIDE 5 -->
 <div id="s5" class="screen merry-bg" onclick="go(6)">
   <div class="big">Also…</div>
   <div class="mid">Merry Clitoris 🎄😁</div>
 </div>
 
+<!-- SLIDE 6 VIDEO -->
 <div id="s6" class="screen" onclick="go(7)">
-  <video id="video" src="samywait.mp4" loop playsinline style="max-width:90%; border-radius:20px;"></video>
+  <video id="video" src="samywait.mp4" loop playsinline style="max-width:90%;border-radius:20px;"></video>
   <div class="next">tap to continue</div>
 </div>
 
+<!-- SLIDE 7 -->
 <div id="s7" class="screen" onclick="go(8)">
   <img src="side.jpg" class="side-img">
-  <div class="mid">Happy birthday again, baby. Enjoy your day. 🌸💜</div>
+  <div class="mid">Happy birthday again, baby. Enjoy your day. 🌷💜✨</div>
 </div>
 
+<!-- SLIDE 8 -->
 <div id="s8" class="screen">
-  <div class="big">I LOVE YOU 🌸💜</div>
+  <div class="big">I LOVE YOU 💜</div>
 </div>
 
-<audio id="song" src="song.mp3" loop></audio>
+<audio id="song" src="song.mp3"></audio>
 <audio id="release" src="release.mp3" loop></audio>
 
 <script>
-let flowers;
-let song = document.getElementById("song");
-let release = document.getElementById("release");
-let video = document.getElementById("video");
-let pausedTime = 0;
+let song=document.getElementById("song");
+let release=document.getElementById("release");
+let video=document.getElementById("video");
+let resumeTime=0;
 
-function go(n) {
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+function go(n){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById("s"+n).classList.add("active");
 
-  if (n === 2) startFlowers();
-  if (n === 5) stopFlowers();
-
-  if (n === 2 && song.paused) {
-    song.currentTime = pausedTime;
-    song.volume = 0.6;
+  if(n===2 && song.paused){
+    song.currentTime=resumeTime;
+    song.volume=.6;
     song.play();
   }
 
-  if (n === 5) {
-    pausedTime = song.currentTime;
-    fadeOut(song);
+  if(n===5){
+    resumeTime=song.currentTime;
+    song.pause();
     release.play();
   }
 
-  if (n === 6) {
+  if(n===6){
     release.pause();
-    video.currentTime = 0;
-    video.volume = 1;
+    video.currentTime=0;
+    video.volume=1;
     video.play();
   }
 
-  if (n === 7) {
+  if(n===7){
     video.pause();
-    song.currentTime = pausedTime;
+    song.currentTime=resumeTime;
     song.play();
   }
-}
-
-function fadeOut(audio) {
-  let v = audio.volume;
-  let fade = setInterval(() => {
-    if (v > 0.05) {
-      v -= 0.05;
-      audio.volume = v;
-    } else {
-      audio.pause();
-      clearInterval(fade);
-    }
-  }, 100);
-}
-
-function startFlowers() {
-  stopFlowers();
-  flowers = setInterval(() => {
-    let f = document.createElement("div");
-    f.className = "flower";
-    f.innerText = "🌸";
-    f.style.left = Math.random()*100+"vw";
-    f.style.animationDuration = 5+Math.random()*5+"s";
-    document.body.appendChild(f);
-    setTimeout(()=>f.remove(),10000);
-  },350);
-}
-
-function stopFlowers() {
-  clearInterval(flowers);
-  document.querySelectorAll(".flower").forEach(f=>f.remove());
 }
 </script>
 
