@@ -27,8 +27,10 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: opacity 1s ease;
+      transition: opacity 0.9s ease;
       z-index: 2;
+      text-align: center;
+      padding: 20px;
     }
 
     .hidden {
@@ -36,13 +38,39 @@
       pointer-events: none;
     }
 
-    /* TEXT */
+    /* TEXT STYLES */
     .enter-text {
       font-size: 2.2rem;
       margin-bottom: 20px;
-      text-align: center;
       animation: pulse 2s infinite;
       pointer-events: none;
+    }
+
+    .big {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      animation: fadeIn 1s forwards;
+    }
+
+    .mid {
+      font-size: 2.1rem;
+      font-weight: 600;
+      margin-bottom: 40px;
+      animation: fadeIn 1.4s forwards;
+    }
+
+    .next {
+      font-size: 1.4rem;
+      opacity: 0.85;
+      animation: pulse 2s infinite;
+    }
+
+    .paragraph {
+      max-width: 720px;
+      font-size: 1.25rem;
+      line-height: 1.7;
+      animation: fadeIn 1.5s forwards;
     }
 
     @keyframes pulse {
@@ -51,19 +79,12 @@
       100% { opacity: 1; }
     }
 
-    .message {
-      font-size: 2.6rem;
-      text-align: center;
-      animation: fadeIn 1.5s forwards;
-      padding: 20px;
-    }
-
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* HEART (CLIP-PATH, FIXED SHAPE) */
+    /* HEART */
     .heart {
       width: 280px;
       height: 260px;
@@ -82,7 +103,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top; /* centers face */
+      object-position: center top;
     }
 
     /* FLOWERS */
@@ -105,26 +126,63 @@
 
 <body>
 
-  <!-- FIRST SCREEN -->
+  <!-- SCREEN 1 -->
   <div id="screen1" class="screen">
     <div class="enter-text">
       CLICK ON ME SAMYYYYYYYY 💜
     </div>
 
-    <div class="heart" onclick="enterSite()">
+    <div class="heart" onclick="goToScreen(2)">
       <img src="front.jpg" alt="Me">
     </div>
   </div>
 
-  <!-- SECOND SCREEN -->
-  <div id="screen2" class="screen hidden">
-    <div class="message">
-      YOU’RE 23!!! 🎉💜<br>
+  <!-- SCREEN 2 -->
+  <div id="screen2" class="screen hidden" onclick="goToScreen(3)">
+    <div class="big">
+      YOU’RE 23!!! 🎉💜
+    </div>
+    <div class="mid">
       EVEN HOTTER NOW 😮😜
+    </div>
+    <div class="next">
+      go next cutu 🌹
     </div>
   </div>
 
-  <!-- FLOWERS SCRIPT -->
+  <!-- SCREEN 3 (FIRST PARAGRAPH ONLY) -->
+  <div id="screen3" class="screen hidden" onclick="goToScreen(4)">
+    <div class="paragraph">
+      <strong>Happy 23rd Birthday, my princess 💜</strong><br><br>
+      You somehow keep getting more beautiful every day, and not just on the outside.
+      Your laugh, the way you care, and the way you make me happy without even trying —
+      all of it means so much to me. You have this calm, comforting way of making everything
+      feel better, and being with you just feels right. I love how you understand me,
+      how safe I feel with you, and how even the smallest moments with you turn into something special.
+      <br><br>
+      <em>(tap anywhere)</em>
+    </div>
+  </div>
+
+  <!-- SCREEN 4 (REST OF MESSAGE) -->
+  <div id="screen4" class="screen hidden">
+    <div class="paragraph">
+      I honestly want to write so much more here, because there’s so much I feel and so many
+      little things about you that I love — and you know that too — but right now I’m so nervous
+      that my mind has gone completely blank 😭 And this chatgpt fucker is asking me to add inside
+      jokes but jab likhna hota hai tab kuch yaad hi nahi aata, jabki hai itna sab.
+      But I guess that’s just me, and you know me well enough to understand that.
+      For now, I’ll just say this — I’m so so grateful I get to love you, celebrate you,
+      and be by your side.
+      <br><br>
+      Here’s to you, to us, and to all the memories still waiting for us 🌸✨
+      <br><br>
+      <strong>Hey, let’s connect in 15.</strong><br>
+      <strong>Mlem</strong>
+    </div>
+  </div>
+
+  <!-- FLOWERS -->
   <script>
     function createFlower() {
       const flower = document.createElement("div");
@@ -136,18 +194,16 @@
       flower.style.fontSize = 16 + Math.random() * 20 + "px";
 
       document.body.appendChild(flower);
-
       setTimeout(() => flower.remove(), 10000);
     }
-
     setInterval(createFlower, 350);
   </script>
 
-  <!-- TRANSITION -->
+  <!-- NAVIGATION -->
   <script>
-    function enterSite() {
-      document.getElementById("screen1").classList.add("hidden");
-      document.getElementById("screen2").classList.remove("hidden");
+    function goToScreen(num) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
+      document.getElementById("screen" + num).classList.remove("hidden");
     }
   </script>
 
