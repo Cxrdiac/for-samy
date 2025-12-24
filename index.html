@@ -69,8 +69,8 @@ body {
 }
 
 /* HEART */
-.heart-svg {
-  width: 280px;
+.heart {
+  width: 300px;
   cursor: pointer;
 }
 
@@ -108,18 +108,28 @@ body {
 <div id="screen1" class="screen">
   <div class="enter-text">CLICK ON ME SAMYYYYYYYY 💜</div>
 
-  <svg class="heart-svg" viewBox="0 0 512 512" onclick="goToScreen(2)">
+  <svg class="heart" viewBox="0 0 512 512" onclick="goToScreen(2)">
     <defs>
-      <pattern id="imgPattern" patternUnits="objectBoundingBox" width="1" height="1">
-        <image href="front.jpg" width="512" height="512" preserveAspectRatio="xMidYMid slice" />
-      </pattern>
+      <clipPath id="heartClip">
+        <path d="
+          M256 464
+          s-32-29-64-58
+          C96 315 32 252 32 176
+          32 113 82 64 144 64
+          c41 0 78 20 96 52
+          18-32 55-52 96-52
+          62 0 112 49 112 112
+          0 76-64 139-160 230
+          -32 29-32 29-32 29z"/>
+      </clipPath>
     </defs>
-    <path
-      d="M256 464s-32-29-64-58C96 315 32 252 32 176
-         32 113 82 64 144 64c41 0 78 20 96 52
-         18-32 55-52 96-52 62 0 112 49 112 112
-         0 76-64 139-160 230-32 29-32 29-32 29z"
-      fill="url(#imgPattern)"
+
+    <image
+      href="front.jpg"
+      width="512"
+      height="512"
+      clip-path="url(#heartClip)"
+      preserveAspectRatio="xMidYMid slice"
     />
   </svg>
 </div>
@@ -150,30 +160,19 @@ body {
   <div class="paragraph">
     I honestly want to write so much more here, because there’s so much I feel and so many
     little things about you that I love — and you know that too — but right now I’m so nervous
-    that my mind has gone completely blank 😭 And this chatgpt fucker is asking me to add inside
-    jokes but jab likhna hota hai tab kuch yaad hi nahi aata, jabki hai itna sab.
-    But I guess that’s just me, and you know me well enough to understand that.
-    For now, I’ll just say this — I’m so so grateful I get to love you, celebrate you,
-    and be by your side.
+    that my mind has gone completely blank 😭
     <br><br>
-    Here’s to you, to us, and to all the memories still waiting for us 🌸✨
+    I’m so so grateful I get to love you, celebrate you, and be by your side.
     <br><br>
     <strong>Hey, let’s connect in 15.</strong><br>
     <strong>Mlem</strong>
   </div>
 </div>
 
-<!-- SCREEN 5 -->
-<div id="screen5" class="screen hidden" onclick="goToScreen(6)">
+<!-- SCREEN 5 (LAST FOR NOW) -->
+<div id="screen5" class="screen hidden">
   <div class="big">Also…</div>
   <div class="mid">Merry Clitoris 🎄😌</div>
-  <div class="next">tap anywhere 🎁</div>
-</div>
-
-<!-- SCREEN 6 -->
-<div id="screen6" class="screen hidden">
-  <div class="big">Okay now come here 💜</div>
-  <div class="mid">I’m already waiting 😌</div>
 </div>
 
 <!-- AUDIO -->
@@ -193,12 +192,13 @@ function createFlower() {
 setInterval(createFlower, 350);
 </script>
 
-<!-- NAV + MUSIC -->
+<!-- NAV + MUSIC (FIXED) -->
 <script>
 function goToScreen(n) {
   document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
   document.getElementById("screen" + n).classList.remove("hidden");
 
+  // MUSIC STARTS ON SCREEN 2 (USER CLICK SAFE)
   if (n === 2) {
     const music = document.getElementById("bgMusic");
     if (music.paused) {
