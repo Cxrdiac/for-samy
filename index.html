@@ -7,91 +7,112 @@
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  user-select:none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-body{
-  height:100vh;
-  background:linear-gradient(180deg,#e7c6ff,#9b5de5);
-  color:white;
-  overflow:hidden;
-  font-family:'Poppins',sans-serif;
+body {
+  height: 100vh;
+  background: linear-gradient(180deg, #e7c6ff, #9b5de5);
+  overflow: hidden;
+  color: white;
+  font-family: 'Poppins', sans-serif;
 }
 
-.screen{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:25px;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 1.2s ease;
+/* SCREENS */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 25px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease;
 }
 
-.screen.active{
-  opacity:1;
-  pointer-events:auto;
+.screen.active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.enter-text{
-  font-family:'Pacifico',cursive;
-  font-size:2.4rem;
-  margin-bottom:25px;
-  animation:pulse 2s infinite;
+/* TEXT */
+.enter-text {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.4rem;
+  margin-bottom: 25px;
+  animation: pulse 2s infinite;
 }
 
-.big{
-  font-family:'Pacifico',cursive;
-  font-size:3.2rem;
+.big {
+  font-family: 'Pacifico', cursive;
+  font-size: 3.2rem;
 }
 
-.mid{
-  font-size:2rem;
-  margin-top:12px;
+.mid {
+  font-size: 2rem;
+  margin-top: 12px;
 }
 
-.next{
-  margin-top:30px;
-  font-size:1.4rem;
-  animation:pulse 2s infinite;
+.next {
+  margin-top: 30px;
+  font-size: 1.4rem;
+  animation: pulse 2s infinite;
 }
 
-.paragraph{
-  max-width:720px;
-  font-size:1.25rem;
-  line-height:1.8;
+.paragraph {
+  max-width: 720px;
+  font-size: 1.25rem;
+  line-height: 1.8;
 }
 
-@keyframes pulse{
-  0%{opacity:1}
-  50%{opacity:.6}
-  100%{opacity:1}
+/* GLOW FOR HEART IMAGE */
+.heart-img {
+  width: 320px;
+  max-width: 80vw;
+  cursor: pointer;
+  animation: glow 3s infinite ease-in-out;
+  filter: drop-shadow(0 0 25px rgba(255,255,255,0.7));
 }
 
-/* CLITORIS BG */
-.merry-bg{
-  background:url("maria-ss.png") center/cover;
+@keyframes glow {
+  0% { filter: drop-shadow(0 0 15px rgba(255,255,255,0.5)); }
+  50% { filter: drop-shadow(0 0 35px rgba(255,255,255,0.9)); }
+  100% { filter: drop-shadow(0 0 15px rgba(255,255,255,0.5)); }
 }
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* CLITORIS BACKGROUND */
+.merry-bg {
+  background-image: url("maria-ss.png");
+  background-size: cover;
+  background-position: center;
+}
+
 .merry-bg .big,
-.merry-bg .mid{
-  background:rgba(0,0,0,.35);
-  padding:14px 22px;
-  border-radius:12px;
+.merry-bg .mid {
+  background: rgba(0,0,0,0.35);
+  padding: 14px 22px;
+  border-radius: 12px;
 }
 
 /* SIDE IMAGE */
-.side-img{
-  width:280px;
-  border-radius:22px;
-  margin-bottom:20px;
+.side-img {
+  width: 280px;
+  border-radius: 22px;
+  margin-bottom: 20px;
 }
 </style>
 </head>
@@ -101,25 +122,7 @@ body{
 <!-- SLIDE 1 -->
 <div id="s1" class="screen active">
   <div class="enter-text">CLICK ON ME SAMYYYYYYYY 💜</div>
-
-  <div onclick="go(2)" style="cursor:pointer;filter:drop-shadow(0 0 25px rgba(255,255,255,.8));">
-    <svg width="340" height="320" viewBox="0 0 512 471">
-      <defs>
-        <clipPath id="heartClip">
-          <path d="M256 471s-256-149-256-303C0 76 76 0 168 0c59 0 111 30 144 76C345 30 397 0 456 0c92 0 168 76 168 168 0 154-256 303-256 303z"/>
-        </clipPath>
-      </defs>
-
-      <image 
-        href="front.jpg"
-        width="512"
-        height="471"
-        clip-path="url(#heartClip)"
-        preserveAspectRatio="xMidYMid slice"
-        transform="translate(30,35)"
-      />
-    </svg>
-  </div>
+  <img src="front.jpg" class="heart-img" onclick="go(2)">
 </div>
 
 <!-- SLIDE 2 -->
@@ -162,7 +165,7 @@ body{
 
 <!-- SLIDE 6 VIDEO -->
 <div id="s6" class="screen" onclick="go(7)">
-  <video id="video" src="samywait.mp4" loop playsinline style="max-width:90%;border-radius:20px;"></video>
+  <video id="video" src="samywait.mp4" loop playsinline style="max-width:90%; border-radius:20px;"></video>
   <div class="next">tap to continue</div>
 </div>
 
@@ -181,37 +184,37 @@ body{
 <audio id="release" src="release.mp3" loop></audio>
 
 <script>
-let song=document.getElementById("song");
-let release=document.getElementById("release");
-let video=document.getElementById("video");
-let resumeTime=0;
+let song = document.getElementById("song");
+let release = document.getElementById("release");
+let video = document.getElementById("video");
+let resumeTime = 0;
 
-function go(n){
-  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-  document.getElementById("s"+n).classList.add("active");
+function go(n) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById("s" + n).classList.add("active");
 
-  if(n===2 && song.paused){
-    song.currentTime=resumeTime;
-    song.volume=.6;
+  if (n === 2 && song.paused) {
+    song.currentTime = resumeTime;
+    song.volume = 0.6;
     song.play();
   }
 
-  if(n===5){
-    resumeTime=song.currentTime;
+  if (n === 5) {
+    resumeTime = song.currentTime;
     song.pause();
     release.play();
   }
 
-  if(n===6){
+  if (n === 6) {
     release.pause();
-    video.currentTime=0;
-    video.volume=1;
+    video.currentTime = 0;
+    video.volume = 1;
     video.play();
   }
 
-  if(n===7){
+  if (n === 7) {
     video.pause();
-    song.currentTime=resumeTime;
+    song.currentTime = resumeTime;
     song.play();
   }
 }
