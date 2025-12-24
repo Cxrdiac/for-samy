@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>For You 💜</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&suggested&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -43,6 +43,10 @@ body {
   pointer-events: auto;
 }
 
+.no-padding {
+  padding: 0 !important;
+}
+
 /* TEXT */
 .enter-text {
   font-family: 'Pacifico', cursive;
@@ -61,18 +65,13 @@ body {
   margin-top: 12px;
 }
 
-.next {
-  font-size: 1.4rem;
-  animation: pulse 2s infinite;
-}
-
 .paragraph {
   max-width: 720px;
   font-size: 1.25rem;
   line-height: 1.8;
 }
 
-/* HEART */
+/* HEART IMAGE */
 .heart-img {
   width: 320px;
   max-width: 80vw;
@@ -128,7 +127,6 @@ body {
 <div id="s2" class="screen" onclick="go(3)">
   <div class="big">YOU’RE 23!!! 🎉</div>
   <div class="mid">EVEN HOTTER NOW 😮😜</div>
-  <div class="next">go next cutu 🌹</div>
 </div>
 
 <!-- SLIDE 3 -->
@@ -146,7 +144,7 @@ body {
 <!-- SLIDE 4 -->
 <div id="s4" class="screen" onclick="go(5)">
   <div class="paragraph">
-    I honestly want to write so much more here, because there’s so much I feel and so many little things about you that I love — and you know that too —
+    I honestly want to write so much more here, because there’s so much I feel and so many little things about you that I love — and you know that too —  
     but right now I’m so nervous that my mind has gone completely blank 😭<br><br>
     And this chatgpt is asking me to add inside jokes but jab likhna hota hai tab kuch yaad hi nahi aata,
     jabki hai itna sab tumhe bhi pata hai.<br><br>
@@ -164,22 +162,19 @@ body {
 
 <!-- SLIDE 6 VIDEO -->
 <div id="s6" class="screen no-padding" onclick="go(7)">
-  <video 
-    id="video" 
-    src="samywait_v2.mp4" 
+  <video
+    id="video"
+    src="samywait_v2.mp4"
     loop
-    autoplay
-    muted
     playsinline
     style="
       width: 100vw;
       height: 100vh;
-      object-fit: cover;
+      object-fit: contain;
+      background: black;
     ">
   </video>
 </div>
-
-
 
 <!-- SLIDE 7 -->
 <div id="s7" class="screen" onclick="go(8)">
@@ -196,9 +191,9 @@ body {
 <audio id="release" src="release.mp3" loop></audio>
 
 <script>
-let song = document.getElementById("song");
-let release = document.getElementById("release");
-let video = document.getElementById("video");
+const song = document.getElementById("song");
+const release = document.getElementById("release");
+const video = document.getElementById("video");
 let resumeTime = 0;
 
 function go(n) {
@@ -214,13 +209,13 @@ function go(n) {
   if (n === 5) {
     resumeTime = song.currentTime;
     song.pause();
+    release.currentTime = 0;
     release.play();
   }
 
   if (n === 6) {
     release.pause();
     video.currentTime = 0;
-    video.muted = false; // IMPORTANT FIX
     video.volume = 1;
     video.play();
   }
