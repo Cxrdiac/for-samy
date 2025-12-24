@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You 💜</title>
+<title>For You</title>
 
 <style>
 * {
@@ -30,7 +30,6 @@ body {
   text-align: center;
   padding: 20px;
   transition: opacity 0.8s ease;
-  z-index: 2;
 }
 
 .hidden {
@@ -42,52 +41,33 @@ body {
 .enter-text {
   font-size: 2.2rem;
   margin-bottom: 25px;
-  animation: pulse 2s infinite;
 }
 
-.big {
-  font-size: 3rem;
-  font-weight: 800;
-}
-
-.mid {
-  font-size: 2.1rem;
-  margin-top: 10px;
-}
-
-.next {
-  margin-top: 35px;
-  font-size: 1.4rem;
-  animation: pulse 2s infinite;
-}
-
-.paragraph {
-  max-width: 720px;
-  font-size: 1.25rem;
-  line-height: 1.7;
-  animation: fadeIn 1.5s forwards;
-}
-
-/* SIMPLE HEART FRAME (ORIGINAL STYLE) */
+/* ✅ REAL HEART FRAME */
 .heart {
   width: 280px;
   height: 260px;
   cursor: pointer;
   overflow: hidden;
-  clip-path: path(
-    "M140 40
-     C140 0 280 0 280 80
-     C280 160 140 240 140 260
-     C140 240 0 160 0 80
-     C0 0 140 0 140 40Z"
-  );
+
+  -webkit-mask-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 29'>\
+    <path fill='white' d='M23.6,0c-3.4,0-6.4,2.1-7.6,5.1C14.8,2.1,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.3,16,20.6,16,20.6s16-11.3,16-20.6C32,3.8,28.2,0,23.6,0z'/>\
+  </svg>");
+  mask-image: -webkit-mask-image;
+
+  -webkit-mask-size: cover;
+  mask-size: cover;
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 .heart img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center 15%;
 }
 
 /* FLOWERS */
@@ -97,34 +77,6 @@ body {
   font-size: 20px;
   animation: fall linear infinite;
   opacity: 0.8;
-  z-index: 1;
-}
-
-/* MERRY CLITORIS BACKGROUND */
-.merry-bg {
-  background-image: url("maria-ss.png");
-  background-size: cover;
-  background-position: center;
-}
-
-.merry-bg .big,
-.merry-bg .mid {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 10px 18px;
-  border-radius: 10px;
-  opacity: 0.9;
-}
-
-/* ANIMATIONS */
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.6; }
-  100% { opacity: 1; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fall {
@@ -137,59 +89,43 @@ body {
 
 <!-- SCREEN 1 -->
 <div id="screen1" class="screen">
-  <div class="enter-text">CLICK ON ME SAMYYYYYYYY 💜</div>
+  <div class="enter-text">CLICK ON ME SAMYYYYYYYY</div>
+
   <div class="heart" onclick="goToScreen(2)">
-    <img src="front.jpg" alt="me">
+    <img src="front.jpg" alt="front">
   </div>
 </div>
 
 <!-- SCREEN 2 -->
-<div id="screen2" class="screen hidden" onclick="goToScreen(3)">
-  <div class="big">YOU’RE 23!!!</div>
-  <div class="mid">EVEN HOTTER NOW</div>
-  <div class="next">go next cutu</div>
-</div>
-
-<!-- SCREEN 3 -->
-<div id="screen3" class="screen hidden" onclick="goToScreen(4)">
-  <div class="paragraph">
-    Happy 23rd Birthday, my princess 💜<br><br>
-    You somehow keep getting more beautiful every day, and not just on the outside.
-    Your laugh, the way you care, and the way you make me happy without even trying —
-    all of it means so much to me. You have this calm, comforting way of making everything
-    feel better, and being with you just feels right. I love how you understand me,
-    how safe I feel with you, and how even the smallest moments with you turn into something special.
-  </div>
-</div>
-
-<!-- SCREEN 4 -->
-<div id="screen4" class="screen hidden" onclick="goToScreen(5)">
-  <div class="paragraph">
-    I honestly want to write so much more here, because there’s so much I feel and so many
-    little things about you that I love — and you know that too — but right now I’m so nervous
-    that my mind has gone completely blank 😭 And this chatgpt fucker is asking me to add inside
-    jokes but jab likhna hota hai tab kuch yaad hi nahi aata, jabki hai itna sab.
-    But I guess that’s just me, and you know me well enough to understand that.
-    For now, I’ll just say this — I’m so so grateful I get to love you, celebrate you,
-    and be by your side.<br><br>
-    Here’s to you, to us, and to all the memories still waiting for us 🌸✨<br>
-    Hey, let’s connect in 15.<br>
-    Mlem
-  </div>
-</div>
-
-<!-- SCREEN 5 (LAST) -->
-<div id="screen5" class="screen hidden merry-bg">
-  <div class="big">Also…</div>
-  <div class="mid">Merry Clitoris 🎄😌</div>
+<div id="screen2" class="screen hidden">
+  <h1>YOU’RE 23!!!</h1>
 </div>
 
 <!-- AUDIO -->
-<audio id="bgMusic" src="song.mp3" preload="auto"></audio>
+<audio id="bgMusic" src="song.mp3"></audio>
 
-<!-- FLOWERS -->
 <script>
-function createFlower() {
+function goToScreen(n) {
+  document.getElementById("screen1").classList.add("hidden");
+  document.getElementById("screen2").classList.remove("hidden");
+
+  const music = document.getElementById("bgMusic");
+  music.volume = 0;
+  music.play();
+
+  let v = 0;
+  const fade = setInterval(() => {
+    if (v < 0.6) {
+      v += 0.02;
+      music.volume = v;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
+}
+
+// flowers
+setInterval(() => {
   const f = document.createElement("div");
   f.className = "flower";
   f.innerText = "🌸";
@@ -197,33 +133,7 @@ function createFlower() {
   f.style.animationDuration = 5 + Math.random() * 5 + "s";
   document.body.appendChild(f);
   setTimeout(() => f.remove(), 10000);
-}
-setInterval(createFlower, 350);
-</script>
-
-<!-- NAV + MUSIC -->
-<script>
-function goToScreen(n) {
-  document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
-  document.getElementById("screen" + n).classList.remove("hidden");
-
-  if (n === 2) {
-    const music = document.getElementById("bgMusic");
-    if (music.paused) {
-      music.volume = 0;
-      music.play();
-      let vol = 0;
-      const fade = setInterval(() => {
-        if (vol < 0.6) {
-          vol += 0.02;
-          music.volume = vol;
-        } else {
-          clearInterval(fade);
-        }
-      }, 200);
-    }
-  }
-}
+}, 350);
 </script>
 
 </body>
