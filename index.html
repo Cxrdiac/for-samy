@@ -14,7 +14,7 @@
 
     body {
       height: 100vh;
-      background: linear-gradient(180deg, #cdb4db, #9d4edd);
+      background: linear-gradient(180deg, #e0c3fc, #8e44ad);
       overflow: hidden;
       color: white;
     }
@@ -27,7 +27,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: opacity 1.2s ease;
+      transition: opacity 1s ease;
       z-index: 2;
     }
 
@@ -37,13 +37,12 @@
     }
 
     /* TEXT */
-    .enter {
-      font-size: 2.4rem;
-      cursor: pointer;
-      margin-bottom: 15px;
-      animation: pulse 2s infinite;
-      z-index: 3;
+    .enter-text {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
       text-align: center;
+      animation: pulse 2s infinite;
+      pointer-events: none;
     }
 
     @keyframes pulse {
@@ -53,9 +52,10 @@
     }
 
     .message {
-      font-size: 2rem;
+      font-size: 2.6rem;
       text-align: center;
-      animation: fadeIn 2s forwards;
+      animation: fadeIn 1.5s forwards;
+      padding: 20px;
     }
 
     @keyframes fadeIn {
@@ -63,25 +63,26 @@
       to { opacity: 1; }
     }
 
-    /* HEART IMAGE */
+    /* HEART (CLIP-PATH, FIXED SHAPE) */
     .heart {
-      width: 260px;
-      aspect-ratio: 1 / 1;
+      width: 280px;
+      height: 260px;
+      cursor: pointer;
       overflow: hidden;
-      z-index: 3;
-
-      mask-image: url("data:image/svg+xml;utf8,\
-      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 29'>\
-        <path fill='white' d='M23.6,0c-3.4,0-6.4,2.1-7.6,5.1C14.8,2.1,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.3,16,20.6,16,20.6s16-11.3,16-20.6C32,3.8,28.2,0,23.6,0z'/>\
-      </svg>");
-      mask-size: cover;
-      mask-repeat: no-repeat;
+      clip-path: path(
+        "M140 40
+         C140 0 280 0 280 80
+         C280 160 140 240 140 260
+         C140 240 0 160 0 80
+         C0 0 140 0 140 40Z"
+      );
     }
 
     .heart img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top; /* centers face */
     }
 
     /* FLOWERS */
@@ -90,7 +91,7 @@
       top: -50px;
       font-size: 22px;
       animation: fall linear infinite;
-      opacity: 0.8;
+      opacity: 0.85;
       z-index: 1;
     }
 
@@ -106,20 +107,20 @@
 
   <!-- FIRST SCREEN -->
   <div id="screen1" class="screen">
-    <div class="enter" onclick="enterSite()">
-      Click on me, babe 💜
+    <div class="enter-text">
+      CLICK ON ME SAMYYYYYYYY 💜
     </div>
 
-    <div class="heart">
+    <div class="heart" onclick="enterSite()">
       <img src="front.jpg" alt="Me">
     </div>
   </div>
 
-  <!-- SECOND SCREEN (placeholder for later) -->
+  <!-- SECOND SCREEN -->
   <div id="screen2" class="screen hidden">
     <div class="message">
-      Hi love… 💫<br>
-      I made this just for you.
+      YOU’RE 23!!! 🎉💜<br>
+      EVEN HOTTER NOW 😮😜
     </div>
   </div>
 
@@ -139,10 +140,10 @@
       setTimeout(() => flower.remove(), 10000);
     }
 
-    setInterval(createFlower, 400);
+    setInterval(createFlower, 350);
   </script>
 
-  <!-- PAGE TRANSITION -->
+  <!-- TRANSITION -->
   <script>
     function enterSite() {
       document.getElementById("screen1").classList.add("hidden");
