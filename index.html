@@ -62,7 +62,6 @@ body {
 }
 
 .next {
-  margin-top: 30px;
   font-size: 1.4rem;
   animation: pulse 2s infinite;
 }
@@ -73,7 +72,7 @@ body {
   line-height: 1.8;
 }
 
-/* GLOW FOR HEART IMAGE */
+/* HEART */
 .heart-img {
   width: 320px;
   max-width: 80vw;
@@ -114,6 +113,17 @@ body {
   border-radius: 22px;
   margin-bottom: 20px;
 }
+
+/* VIDEO WRAPPER */
+.video-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.video-next {
+  margin-top: 10px;
+}
 </style>
 </head>
 
@@ -138,12 +148,9 @@ body {
     Happy 23rd Birthday, my princess 😌💜<br><br>
     You somehow keep getting more beautiful every day, and not just on the outside.
     Your laugh, the way you care, and the way you make me happy without even trying —
-    all of it means so much to me.
-    <br><br>
-    You have this calm, comforting way of making everything
-    feel better, and being with you just feels right. I love how you understand me,
-    how safe I feel with you, and how even the smallest moments with you turn into something special.
-    
+    all of it means so much to me.<br><br>
+    You have this calm, comforting way of making everything feel better, and being with you just feels right.
+    I love how you understand me, how safe I feel with you, and how even the smallest moments with you turn into something special.
   </div>
 </div>
 
@@ -151,11 +158,9 @@ body {
 <div id="s4" class="screen" onclick="go(5)">
   <div class="paragraph">
     I honestly want to write so much more here, because there’s so much I feel and so many little things about you that I love — and you know that too —
-    but right now I’m so nervous that my mind has gone completely blank 😭
-    <br><br>
+    but right now I’m so nervous that my mind has gone completely blank 😭<br><br>
     And this chatgpt is asking me to add inside jokes but jab likhna hota hai tab kuch yaad hi nahi aata,
-    jabki hai itna sab tumhe bhi pata hai.
-    <br><br>
+    jabki hai itna sab tumhe bhi pata hai.<br><br>
     Here’s to you, to us, and to all the memories still waiting for us 🌸✨<br>
     Hey, let’s connect in 15.<br>
     Mlem
@@ -170,23 +175,25 @@ body {
 
 <!-- SLIDE 6 VIDEO -->
 <div id="s6" class="screen" onclick="go(7)">
-  <video 
-    id="video" 
-    src="samywait.mp4" 
-    loop 
-    playsinline
-    style="
-      max-width: 70%;
-      max-height: 65vh;
-      border-radius: 25px;
-    ">
-  </video>
+  <div class="video-wrap">
+    <video 
+      id="video" 
+      src="samywait.mp4" 
+      loop 
+      playsinline
+      style="
+        width: 78%;
+        max-width: 900px;
+        max-height: 70vh;
+        border-radius: 25px;
+      ">
+    </video>
 
-  <div class="next" style="margin-top: 15px;">
-    tap to continue
+    <div class="next video-next">
+      tap to continue
+    </div>
   </div>
 </div>
-
 
 <!-- SLIDE 7 -->
 <div id="s7" class="screen" onclick="go(8)">
