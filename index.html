@@ -4,12 +4,14 @@
 <meta charset="UTF-8">
 <title>For You 💜</title>
 
+<!-- Cute fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
 
   user-select: none;
   -webkit-user-select: none;
@@ -17,9 +19,10 @@
 
 body {
   height: 100vh;
-  background: linear-gradient(180deg, #e0c3fc, #8e44ad);
+  background: linear-gradient(180deg, #e7c6ff, #9b5de5);
   overflow: hidden;
   color: white;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* SCREENS */
@@ -31,7 +34,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 20px;
+  padding: 25px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 1.2s ease;
@@ -44,19 +47,20 @@ body {
 
 /* TEXT */
 .enter-text {
-  font-size: 2.2rem;
+  font-family: 'Pacifico', cursive;
+  font-size: 2.4rem;
   margin-bottom: 25px;
   animation: pulse 2s infinite;
 }
 
 .big {
-  font-size: 3rem;
-  font-weight: 800;
+  font-family: 'Pacifico', cursive;
+  font-size: 3.2rem;
 }
 
 .mid {
-  font-size: 2.1rem;
-  margin-top: 10px;
+  font-size: 2rem;
+  margin-top: 12px;
 }
 
 .next {
@@ -68,21 +72,21 @@ body {
 .paragraph {
   max-width: 720px;
   font-size: 1.25rem;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
-/* ❤️ HEART (FINAL FIX + GLOW) */
+/* ❤️ HEART (ACTUALLY FIXED) */
 .heart {
-  width: 330px;
-  height: 330px;
+  width: 340px;
+  height: 340px;
   cursor: pointer;
   animation: glow 3s infinite ease-in-out;
 
   -webkit-mask-image: url("data:image/svg+xml;utf8,\
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 29'>\
-    <path fill='white' d='M23.6,0c-3.4,0-6.4,2.1-7.6,5.1C14.8,2.1,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.3,16,20.6,16,20.6s16-11.3,16-20.6C32,3.8,28.2,0,23.6,0z'/>\
-  </svg>");
-  -webkit-mask-size: cover;
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 471'>\
+<path fill='white' d='M256 471s-256-149-256-303C0 76 76 0 168 0c59 0 111 30 144 76C345 30 397 0 456 0c92 0 168 76 168 168 0 154-256 303-256 303z'/>\
+</svg>");
+  -webkit-mask-size: contain;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
 }
@@ -91,12 +95,13 @@ body {
   width: 115%;
   height: 140%;
   object-fit: cover;
-  object-position: 58% 60%;
+  object-position: 60% 65%;
 }
 
+/* glow */
 @keyframes glow {
   0% { box-shadow: 0 0 15px rgba(255,255,255,0.4); }
-  50% { box-shadow: 0 0 30px rgba(255,255,255,0.8); }
+  50% { box-shadow: 0 0 35px rgba(255,255,255,0.9); }
   100% { box-shadow: 0 0 15px rgba(255,255,255,0.4); }
 }
 
@@ -104,9 +109,9 @@ body {
 .flower {
   position: absolute;
   top: -40px;
-  font-size: 20px;
+  font-size: 22px;
   animation: fall linear infinite;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 @keyframes fall {
@@ -119,7 +124,7 @@ body {
   100% { opacity: 1; }
 }
 
-/* MERRY CLITORIS */
+/* CLITORIS BACKGROUND */
 .merry-bg {
   background-image: url("maria-ss.png");
   background-size: cover;
@@ -129,14 +134,14 @@ body {
 .merry-bg .big,
 .merry-bg .mid {
   background: rgba(0,0,0,0.35);
-  padding: 12px 20px;
-  border-radius: 10px;
+  padding: 14px 22px;
+  border-radius: 12px;
 }
 
 /* SIDE IMAGE */
 .side-img {
   width: 280px;
-  border-radius: 20px;
+  border-radius: 22px;
   margin-bottom: 20px;
 }
 </style>
@@ -168,7 +173,11 @@ body {
 
 <div id="s4" class="screen" onclick="go(5)">
   <div class="paragraph">
-    I honestly want to write so much more here, but right now my mind has gone completely blank 😭
+    I honestly want to write so much more here, because there’s so much I feel and so many little things about you that I love — and you know that too —
+    but right now I’m so nervous that my mind has gone completely blank 😭
+    <br><br>
+    And this chatgpt is asking me to add inside jokes but jab likhna hota hai tab kuch yaad hi nahi aata,
+    jabki hai itna sab tumhe bhi pata hai.
     <br><br>
     Here’s to you, to us, and to all the memories still waiting for us 🌸✨<br>
     Hey, let’s connect in 15.<br>
@@ -178,7 +187,7 @@ body {
 
 <div id="s5" class="screen merry-bg" onclick="go(6)">
   <div class="big">Also…</div>
-  <div class="mid">Merry Clitoris 🎄😌</div>
+  <div class="mid">Merry Clitoris 🎄😁</div>
 </div>
 
 <div id="s6" class="screen" onclick="go(7)">
@@ -188,15 +197,15 @@ body {
 
 <div id="s7" class="screen" onclick="go(8)">
   <img src="side.jpg" class="side-img">
-  <div class="mid">Happy birthday again, baby. Enjoy your day.</div>
+  <div class="mid">Happy birthday again, baby. Enjoy your day. 🌸💜</div>
 </div>
 
 <div id="s8" class="screen">
-  <div class="big" style="font-size:4rem;">I LOVE YOU</div>
+  <div class="big">I LOVE YOU 🌸💜</div>
 </div>
 
-<audio id="song" src="song.mp3"></audio>
-<audio id="release" src="release.mp3"></audio>
+<audio id="song" src="song.mp3" loop></audio>
+<audio id="release" src="release.mp3" loop></audio>
 
 <script>
 let flowers;
@@ -221,20 +230,19 @@ function go(n) {
   if (n === 5) {
     pausedTime = song.currentTime;
     fadeOut(song);
-    release.volume = 1;
     release.play();
   }
 
   if (n === 6) {
     release.pause();
+    video.currentTime = 0;
     video.volume = 1;
     video.play();
   }
 
   if (n === 7) {
-    pausedTime = pausedTime || 0;
+    video.pause();
     song.currentTime = pausedTime;
-    song.volume = 0.6;
     song.play();
   }
 }
