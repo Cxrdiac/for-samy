@@ -27,7 +27,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.9s ease;
+      transition: opacity 0.8s ease;
       z-index: 2;
       text-align: center;
       padding: 20px;
@@ -38,7 +38,7 @@
       pointer-events: none;
     }
 
-    /* TEXT STYLES */
+    /* TEXT */
     .enter-text {
       font-size: 2.2rem;
       margin-bottom: 20px;
@@ -57,7 +57,7 @@
       font-size: 2.1rem;
       font-weight: 600;
       margin-bottom: 40px;
-      animation: fadeIn 1.4s forwards;
+      animation: fadeIn 1.3s forwards;
     }
 
     .next {
@@ -84,26 +84,15 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* HEART */
-    .heart {
-      width: 280px;
-      height: 260px;
+    /* PERFECT HEART (SVG BASED – FIXED) */
+    .heart-wrapper {
+      width: 300px;
       cursor: pointer;
-      overflow: hidden;
-      clip-path: path(
-        "M140 40
-         C140 0 280 0 280 80
-         C280 160 140 240 140 260
-         C140 240 0 160 0 80
-         C0 0 140 0 140 40Z"
-      );
     }
 
-    .heart img {
+    .heart-wrapper svg {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
+      height: auto;
     }
 
     /* FLOWERS */
@@ -121,6 +110,22 @@
         transform: translateY(110vh) rotate(360deg);
       }
     }
+
+    /* SNOW FOR CHRISTMAS SLIDE */
+    .snow {
+      position: absolute;
+      top: -30px;
+      font-size: 18px;
+      animation: snowFall linear infinite;
+      opacity: 0.9;
+      z-index: 1;
+    }
+
+    @keyframes snowFall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
   </style>
 </head>
 
@@ -132,25 +137,39 @@
       CLICK ON ME SAMYYYYYYYY 💜
     </div>
 
-    <div class="heart" onclick="goToScreen(2)">
-      <img src="front.jpg" alt="Me">
+    <div class="heart-wrapper" onclick="goToScreen(2)">
+      <svg viewBox="0 0 200 180">
+        <defs>
+          <clipPath id="heartClip">
+            <path d="
+              M100 30
+              C100 0 200 0 200 60
+              C200 120 100 170 100 180
+              C100 170 0 120 0 60
+              C0 0 100 0 100 30 Z
+            "/>
+          </clipPath>
+        </defs>
+
+        <image 
+          href="front.jpg"
+          width="200"
+          height="180"
+          clip-path="url(#heartClip)"
+          preserveAspectRatio="xMidYMid slice"
+        />
+      </svg>
     </div>
   </div>
 
   <!-- SCREEN 2 -->
   <div id="screen2" class="screen hidden" onclick="goToScreen(3)">
-    <div class="big">
-      YOU’RE 23!!! 🎉💜
-    </div>
-    <div class="mid">
-      EVEN HOTTER NOW 😮😜
-    </div>
-    <div class="next">
-      go next cutu 🌹
-    </div>
+    <div class="big">YOU’RE 23!!! 🎉💜</div>
+    <div class="mid">EVEN HOTTER NOW 😮😜</div>
+    <div class="next">go next cutu 🌹</div>
   </div>
 
-  <!-- SCREEN 3 (FIRST PARAGRAPH ONLY) -->
+  <!-- SCREEN 3 -->
   <div id="screen3" class="screen hidden" onclick="goToScreen(4)">
     <div class="paragraph">
       <strong>Happy 23rd Birthday, my princess 💜</strong><br><br>
@@ -164,8 +183,8 @@
     </div>
   </div>
 
-  <!-- SCREEN 4 (REST OF MESSAGE) -->
-  <div id="screen4" class="screen hidden">
+  <!-- SCREEN 4 -->
+  <div id="screen4" class="screen hidden" onclick="goToScreen(5)">
     <div class="paragraph">
       I honestly want to write so much more here, because there’s so much I feel and so many
       little things about you that I love — and you know that too — but right now I’m so nervous
@@ -182,21 +201,45 @@
     </div>
   </div>
 
+  <!-- SCREEN 5 – MERRY CLITORIS -->
+  <div id="screen5" class="screen hidden" onclick="goToScreen(6)">
+    <div class="big">Also…</div>
+    <div class="mid">Merry Clitoris 🎄😌</div>
+    <div class="next">tap anywhere 🎁</div>
+  </div>
+
+  <!-- SCREEN 6 – FINAL (YOU CAN CHANGE LATER) -->
+  <div id="screen6" class="screen hidden">
+    <div class="big">Okay now come here 💜</div>
+    <div class="mid">I’m already waiting 😌</div>
+  </div>
+
   <!-- FLOWERS -->
   <script>
     function createFlower() {
       const flower = document.createElement("div");
       flower.classList.add("flower");
       flower.innerText = "🌸";
-
       flower.style.left = Math.random() * 100 + "vw";
       flower.style.animationDuration = 5 + Math.random() * 5 + "s";
-      flower.style.fontSize = 16 + Math.random() * 20 + "px";
-
       document.body.appendChild(flower);
       setTimeout(() => flower.remove(), 10000);
     }
     setInterval(createFlower, 350);
+  </script>
+
+  <!-- SNOW FOR CHRISTMAS SLIDE -->
+  <script>
+    function createSnow() {
+      const snow = document.createElement("div");
+      snow.classList.add("snow");
+      snow.innerText = "❄️";
+      snow.style.left = Math.random() * 100 + "vw";
+      snow.style.animationDuration = 4 + Math.random() * 4 + "s";
+      document.body.appendChild(snow);
+      setTimeout(() => snow.remove(), 10000);
+    }
+    setInterval(createSnow, 500);
   </script>
 
   <!-- NAVIGATION -->
